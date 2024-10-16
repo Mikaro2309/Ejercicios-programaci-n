@@ -1,0 +1,31 @@
+class Grafo:
+  def __init__(self, vertices):
+      """
+      Inicializa el grafo con una cantidad de vértices y una matriz de adyacencia.
+      """
+      self.vertices = vertices
+      # Crear una matriz de adyacencia con 0s.
+      self.matriz = [[0 for _ in range(vertices)] for _ in range(vertices)]
+
+  def agregar_arista(self, u, v, peso=1):
+      """
+      Agrega una arista entre los vértices u y v con un peso.
+      Si el grafo es no dirigido, también conecta v a u.
+      """
+      # Añadir la arista a la matriz de adyacencia
+      self.matriz[u][v] = peso
+      self.matriz[v][u] = peso  # El grafo es no dirigido
+
+  def mostrar(self):
+      """
+      Muestra la matriz de adyacencia del grafo.
+      """
+      for fila in self.matriz:
+          print(fila)
+
+# Ejemplo de uso
+grafo = Grafo(5)  # Grafo con 5 vértices
+grafo.agregar_arista(0, 1, 2)  # Agregar arista entre 0 y 1 con peso 2
+grafo.agregar_arista(1, 2, 3)  # Agregar arista entre 1 y 2 con peso 3
+grafo.agregar_arista(2, 3, 4)  # Agregar arista entre 2 y 3 con peso 4
+grafo.mostrar()  # Mostrar la matriz de adyacencia
