@@ -1,0 +1,24 @@
+class Grafo:
+    def __init__(self):
+        self.matriz = []
+
+    def agregar_nodo(self):
+        n = len(self.matriz)
+        for fila in self.matriz:
+            fila.append(0)  # Agregar una nueva columna a las filas existentes
+        self.matriz.append([0] * (n + 1))  # Nueva fila con ceros
+
+    def agregar_arista(self, origen, destino, peso=1):
+        if 0 <= origen < len(self.matriz) and 0 <= destino < len(self.matriz):
+            self.matriz[origen][destino] = peso
+
+    def mostrar_matriz(self):
+        for fila in self.matriz:
+            print(fila)
+
+# Ejemplo de uso:
+g = Grafo()
+g.agregar_nodo()  # Nodo 0
+g.agregar_nodo()  # Nodo 1
+g.agregar_arista(0, 1)  # Arista de 0 a 1
+g.mostrar_matriz()
