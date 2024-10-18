@@ -18,7 +18,17 @@ class Grafo:
 
 # Ejemplo de uso:
 g = Grafo()
-g.agregar_nodo()  # Nodo 0
-g.agregar_nodo()  # Nodo 1
-g.agregar_arista(0, 1)  # Arista de 0 a 1
+
+# Agregar 5 nodos
+for _ in range(5):
+    g.agregar_nodo()
+
+# Agregar aristas entre los nodos
+g.agregar_arista(0, 1, 2)  # Arista de nodo 0 a nodo 1 con peso 2
+g.agregar_arista(0, 2, 3)  # Arista de nodo 0 a nodo 2 con peso 3
+g.agregar_arista(1, 3, 4)  # Arista de nodo 1 a nodo 3 con peso 4
+g.agregar_arista(2, 4, 5)  # Arista de nodo 2 a nodo 4 con peso 5
+g.agregar_arista(3, 4, 1)  # Arista de nodo 3 a nodo 4 con peso 1
+
+# Mostrar la matriz de adyacencia
 g.mostrar_matriz()
