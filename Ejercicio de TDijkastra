@@ -1,0 +1,44 @@
+import heapq
+
+# Definición del grafo como diccionario de adyacencias
+grafo = {
+    'A': {'B': 30, 'C': 90},
+    'B': {'C': 72, 'D': 30, 'E': 48},
+    'C': {'D': 120, 'F': 150, 'G': 180},
+    'D': {'E': 100, 'G': 60},
+    'E': {'F': 150},
+    'F': {'G': 72},
+    'G': {}
+}
+
+def dijkstra(grafo, inicio, fin):
+    # Inicializamos la cola de prioridad con el nodo inicial y distancia 0
+    cola, distancias, camino = [(0, inicio)], {inicio: 0}, {}
+    
+    # Procesamos los nodos en la cola de prioridad
+    while cola:
+        distancia, nodo = heapq.heappop(cola)
+        if nodo == fin:  # Si alcanzamos el nodo destino, terminamos
+            break
+        # Recorremos los vecinos del nodo actual
+        for vecino, peso in grafo[nodo].items():
+            nueva_dist = distancia + peso  # Calculamos la nueva distancia
+            # Si encontramos una ruta más corta hacia el vecino
+            if nueva_dist < distancias.get(vecino, float('inf')):
+                distancias[vecino], camino[vecino] = nueva_dist, nodo  # Actualizamos distancia y predecesor
+                heapq.heappush(cola, (nueva_dist, vecino))  # Añadimos el vecino a la cola
+
+    # Reconstruimos la ruta óptima desde el nodo destino hacia el inicio
+    ruta, paso = [], fin
+    while paso:
+        ruta.insert(0, paso)  # Insertamos el nodo al inicio de la ruta
+        paso = camino.get(paso)  # Retrocedemos usando el diccionario de predecesores
+    
+    # Devolvemos la distancia mínima y la ruta
+    return distancias.get(fin, float('inf')), ruta
+
+# Ejecución del algoritmo para encontrar el camino más corto desde A hasta G
+costo, ruta = dijkstra(grafo, 'A', 'G')
+print("Costo mínimo:", costo)
+print("Ruta más corta:", " -> ".join(ruta))
+
